@@ -2,10 +2,18 @@ import Head from 'next/head'
 import {Inter} from 'next/font/google'
 import React from "react";
 import Header from "../../components/Header";
+import {sanityClient} from '../../sanity';
+import {Post} from "../../typings/typings";
 
 const inter = Inter({subsets: ['latin']})
 
-export default function Home() {
+interface Props {
+    posts: Post[]
+}
+
+export default function Home({posts}: Props) {
+    console.log(posts);
+
     return (
         <div className={"max-w-7xl mx-auto"}>
             <Head>
@@ -30,4 +38,21 @@ export default function Home() {
             </div>
         </div>
     )
+}
+export const getServerSideProps = async () => {
+    const query = `*[_type == 'post']{
+      _id,
+        title,
+        description,
+        slug,
+        author->{
+          name
+        }
+    }`
+    const posts = await sanityClient.fetch(query);
+    return {
+        props: {
+            posts,
+        }
+    }
 }
