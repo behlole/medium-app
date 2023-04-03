@@ -2,8 +2,9 @@ import Head from 'next/head'
 import {Inter} from 'next/font/google'
 import React from "react";
 import Header from "../../components/Header";
-import {sanityClient} from '../../sanity';
+import {sanityClient, urlFor} from '../../sanity';
 import {Post} from "../../typings/typings";
+import Link from "next/link";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -36,6 +37,32 @@ export default function Home({posts}: Props) {
                     className={"hidden md:inline-flex h-32 lg:h-full"}
                     alt={"M logo"} src={"https://accountabilitylab.org/wp-content/uploads/2020/03/Medium-logo.png"}/>
             </div>
+
+            <div className={"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 pd-2 md:p-6"}>
+                {posts.map((post) => (
+                    <Link key={post._id} href={`/post/${post.slug.current}`}>
+                        <div className={"border rounded-lg group cursor-pointer"}>
+                            <img className={
+                                "h-60 w-full object-cover group-hover:scale-105 transition-transform duration-200 ease-in-out"
+                            }
+                                 src={urlFor(post?.mainImage)?.url()!}/>
+                            <div className={"flex justify-between p-5 bg-white"}>
+                                <div>
+                                    <p>
+                                        {post.title}
+                                    </p>
+                                    <p>
+                                        {post.description} by {post.author.name}
+                                    </p>
+                                </div>
+                                <img
+                                    className={"h-12 w-12 rounded-full"}
+                                    src={urlFor(post.author.image).url()!}/>
+                            </div>
+                        </div>
+                    </Link>
+                ))}
+            </div>
         </div>
     )
 }
@@ -45,8 +72,10 @@ export const getServerSideProps = async () => {
         title,
         description,
         slug,
+        mainImage,
         author->{
-          name
+          name,
+          image
         }
     }`
     const posts = await sanityClient.fetch(query);
