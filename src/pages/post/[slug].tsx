@@ -9,7 +9,6 @@ interface Props {
 }
 
 function Posts({post}: Props) {
-    console.log(post)
     return <main>
         <Header/>
     </main>
