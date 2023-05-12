@@ -7,6 +7,7 @@ import PortableText from 'react-portable-text'
 import {SubmitHandler, useForm} from 'react-hook-form'
 import {Simulate} from 'react-dom/test-utils'
 import error = Simulate.error
+import comment from '../../../medium-app-sanity/schemas/comment'
 
 interface Props {
   post: Post
@@ -21,7 +22,6 @@ interface IFormInput {
 
 function Posts({post}: Props) {
   const [submitted, setSubmitted] = useState(false)
-  console.log(post)
   const {
     register,
     handleSubmit,
@@ -84,7 +84,7 @@ function Posts({post}: Props) {
 
     {submitted ? (
         <div className={'flex flex-col p-10 my-10 bg-yellow-500 text-white max-w-2xl mx-auto'}>
-          <h3 className={"text-3xl font-bold"}>
+          <h3 className={'text-3xl font-bold'}>
             Thank you for submitting
           </h3>
           <p>
@@ -137,7 +137,14 @@ function Posts({post}: Props) {
       </form>}
     <div>
       <h3>Comments</h3>
-      <hr/>
+      <hr />
+      {post.comments.map((singleComment) => {
+        return (
+          <div>
+            <p>{singleComment.comment}</p>
+          </div>
+        )
+      })}
     </div>
   </main>
 }
