@@ -135,6 +135,10 @@ function Posts({post}: Props) {
         <input type={'submit'}
                className={'shadow bg-yellow-500 hover:bg-yellow-400 focus:shadow-outline focus:outline-none text-white font-bold px-4 rounded cursor-pointer'} />
       </form>}
+    <div>
+      <h3>Comments</h3>
+      <hr/>
+    </div>
   </main>
 }
 
