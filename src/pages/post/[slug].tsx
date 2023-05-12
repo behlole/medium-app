@@ -112,7 +112,7 @@ function Posts({post}: Props) {
           <span className={'text-gray-700'}>Email</span>
           <input {...register('email', {required: true})}
                  className={'shadow border rounder py-2 px-3 form-input mt-1 block w-full ring-yellow-500  outline-none focus:ring'}
-                 placeholder={'John Appleseed'} type={'text'} />
+                 placeholder={'John Appleseed'} type={'email'} />
         </label>
         <label className={'block mb-5'}>
           <span className={'text-gray-700'}>Comment</span>
@@ -135,13 +135,13 @@ function Posts({post}: Props) {
         <input type={'submit'}
                className={'shadow bg-yellow-500 hover:bg-yellow-400 focus:shadow-outline focus:outline-none text-white font-bold px-4 rounded cursor-pointer'} />
       </form>}
-    <div>
-      <h3>Comments</h3>
-      <hr />
-      {post.comments.map((singleComment) => {
+    <div className={'flex flex-col p-10 my-10 max-w-2xl shadow-yellow-500 shadow space-y-2 mx-auto'}>
+      <h3 className={'text-4xl'}>Comments</h3>
+      <hr className={'pb-2'} />
+      {post.comments.map((singleComment, index) => {
         return (
-          <div>
-            <p>{singleComment.comment}</p>
+          <div key={index}>
+            <p><span className={'text-yellow-500'}>{singleComment.name}: </span>{singleComment.comment}</p>
           </div>
         )
       })}
