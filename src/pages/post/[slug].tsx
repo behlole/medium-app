@@ -21,7 +21,7 @@ interface IFormInput {
 
 function Posts({post}: Props) {
   const [submitted, setSubmitted] = useState(false)
-
+  console.log(post)
   const {
     register,
     handleSubmit,
