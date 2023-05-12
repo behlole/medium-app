@@ -22,7 +22,8 @@
     "react-hook-form": "^7.43.9",
     "react-portable-text": "^0.6.0",
     "typescript": "5.0.3",
-    "sanity": "^3.0.0"
+    "sanity": "^3.0.0",
+    "@sanity/vision": "^3.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
